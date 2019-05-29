@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Card from './../shared/Card/Card';
 import Loading from './../shared/Loading/Loading';
+import { requestArticles } from './../../redux/hackerNewsReducer'
+import { connect } from 'react-redux'
 
 class HackerNews extends Component {
   constructor(props) {
     super(props);
     this.state = { articles: [], loading: true }
+  }
+
+  componentDidMount() {
+    this.props.requestArticles()
   }
 
   render() {
@@ -19,7 +25,11 @@ class HackerNews extends Component {
   }
 }
 
-export default HackerNews;
+function mapStatetoProps(reduxState) {
+  return reduxState
+}
+
+export default connect(mapStatetoProps, { requestArticles: requestArticles })(HackerNews);
 
 
 const styles = {
