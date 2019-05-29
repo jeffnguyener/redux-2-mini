@@ -8,7 +8,8 @@ const initialState = {
 const REQUEST_ARTICLES = 'REQUEST_ARTICLES'
 
 export function requestArticles() {
-    const articles = axios.get('/api/hacker-news').then((res) => res.data)
+    const articles = axios.get('/api/hacker-news').then(res => res.data)
+    console.log(articles)
     return {
         type: REQUEST_ARTICLES,
         payload: articles
@@ -24,7 +25,7 @@ function hackerNewsReducer(state = initialState, action) {
         case REQUEST_ARTICLES + '_REJECTED':
             return {...state, loading: false}
         default:
-            return state
+            return state;
     }
 }
 

@@ -1,5 +1,11 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import hackerNewsReducer from './hackerNewsReducer'
-import promisedMiddleware from 'redux-promise-middleware'
+import promiseMiddleware from 'redux-promise-middleware'
+import mediumReducer from './mediumReducer'
 
-export default createStore(hackerNewsReducer, promisedMiddleware(applyMiddleware))
+const rootReducer = combineReducers({
+    hackerNews: hackerNewsReducer,
+    medium: mediumReducer
+  });
+
+export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

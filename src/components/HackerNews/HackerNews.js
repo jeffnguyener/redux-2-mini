@@ -5,31 +5,27 @@ import { requestArticles } from './../../redux/hackerNewsReducer'
 import { connect } from 'react-redux'
 
 class HackerNews extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { articles: [], loading: true }
-  }
-
   componentDidMount() {
     this.props.requestArticles()
   }
 
   render() {
-    const articles = this.state.articles.map((article => <Card key={article.id} article={article} />))
+    console.log(this.props);
+    const articles = this.props.hackerNews.articles.map((article => <Card key={article.id} article={article} />))
     return (
       <div className='news-container'>
         <img style={styles.logo} src="./hackerNews.jpeg" alt="" />
-        {this.state.loading ? <Loading /> : <div>{articles}</div>}
+        {this.props.loading ? <Loading /> : <div>{articles}</div>}
       </div>
     )
   }
 }
 
-function mapStatetoProps(reduxState) {
+function mapStateToProps(reduxState) {
   return reduxState
-}
+};
 
-export default connect(mapStatetoProps, { requestArticles: requestArticles })(HackerNews);
+export default connect(mapStateToProps, { requestArticles })(HackerNews);
 
 
 const styles = {
@@ -37,4 +33,4 @@ const styles = {
     width: '250px',
     margin: '50px 0px'
   }
-}
+};
